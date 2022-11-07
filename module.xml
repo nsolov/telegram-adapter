@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+  <Document name="telegram-adapter.ZPM">
+    <Module>
+      <Name>telegram-adapter</Name>
+      <Version>0.0.1</Version>
+      <Description>Telegram adapter</Description>
+      <Author>
+        <Person>Nikolay Solovyev</Person>
+        <CopyrightDate>2022</CopyrightDate>
+        <License>MIT</License>
+      </Author>
+      <Packaging>module</Packaging>
+      <Dependencies>
+        <ModuleReference>
+          <Name>sslclient</Name>
+          <Version>1.0.*</Version>
+        </ModuleReference>
+      </Dependencies>
+      <SystemRequirements Version=">=2021.1" Interoperability="enabled" />
+      <Invokes>
+        <Invoke Class="community.utils.SSLClient" Method="CreateSSLConfiguration">
+          <Arg>tg</Arg>
+        </Invoke>
+      </Invokes>
+      <SourcesRoot>src</SourcesRoot>
+      <Resource Name="Telegram.PKG"/>
+      <FileCopy Name="IRIS-logo.png" Target="${libdir}telegram-adapter/"/>
+    </Module>
+  </Document>
+</Export>

@@ -13,6 +13,7 @@ XData ProductionDefinition
   <Item Name="Telegram.Demo.TGBusinessService" Category="" ClassName="Telegram.Demo.TGBusinessService" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="SSLConfig">tg</Setting>
     <Setting Target="Adapter" Name="Token"></Setting>
+    <Setting Target="Adapter" Name="CallInterval">2</Setting>
   </Item>
 </Production>
 }

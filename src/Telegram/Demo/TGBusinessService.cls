@@ -18,16 +18,27 @@ Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %Registered
         Set tr.Data = data.%ToJSON()
         Set tr.Method = "sendMessage"
     } ElseIf (pInput.message.text '= "") {
-        Set data = {
-            "chat_id": (pInput.message.chat.id),
-            "photo": (..ImageFilename),
-            "caption": ("IRIS Echo: "_pInput.message.text),
-            "reply_to_message_id": (pInput.message."message_id"),
-            "protect_content": 1
+        If ( ##class(%File).Exists(..ImageFilename)) {
+            // send image
+            Set data = {
+                "chat_id": (pInput.message.chat.id),
+                "photo": (..ImageFilename),
+                "caption": ("IRIS Echo: "_pInput.message.text),
+                "reply_to_message_id": (pInput.message."message_id"),
+                "protect_content": 1
+            }
+            Set tr.Method = "sendPhoto"
+            Do tr.Files.Insert(..ImageFilename)
+        } Else {
+            // send only text
+            Set data = {
+                "chat_id": (pInput.message.chat.id),
+                "text": ("IRIS Echo: "_pInput.message.text),
+                "reply_to_message_id": (pInput.message."message_id")
+            }
+            Set tr.Method = "sendMessage"
         }
         Set tr.Data = data.%ToJSON()
-        Set tr.Method = "sendPhoto"
-        Do tr.Files.Insert(..ImageFilename)
     }
     
     If (tr.Method '= "") {  
