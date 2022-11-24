@@ -30,7 +30,7 @@ Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %Registered
             Set tr.Method = "sendPhoto"
             Do tr.Files.Insert(..ImageFilename)
         } Else {
-            // send only text
+            // send text only
             Set data = {
                 "chat_id": (pInput.message.chat.id),
                 "text": ("IRIS Echo: "_pInput.message.text),
