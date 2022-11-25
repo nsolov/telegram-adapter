@@ -3,21 +3,20 @@ Class Telegram.Request Extends Ens.Request
 
 Property Method As %String;
 
-/// JSON Serrialized string
-Property Data As %String(MAXLEN = "");
+Property Data As %DynamicAbstractObject;
 
 Property Files As list Of %String;
 
-Property HttpRequest As %Net.HttpRequest [ Transient ];
+Property HttpRequest As %Net.HttpRequest [ Private, Transient ];
 
-Property RootMIMEPart As %Net.MIMEPart [ Transient ];
+Property RootMIMEPart As %Net.MIMEPart [ Private, Transient ];
 
-Property FilesFound As list Of %String [ Transient ];
+Property FilesFound As list Of %String [ Private, Transient ];
 
 Method GetRequest() As %DynamicObject
 {
     Set ..HttpRequest = ##class(%Net.HttpRequest).%New()
-    Set jo = {}.%FromJSON(..Data)
+    Set jo = ..Data
     If (..Files.Count() = 0 ) {
         Set iter = jo.%GetIterator()
         While iter.%GetNext(.key, .value, .type ) { 
@@ -66,7 +65,6 @@ Method GetRequest() As %DynamicObject
         Set status=writer.WriteMIMEBody(..RootMIMEPart)
         
         Do ..HttpRequest.SetHeader("Content-Type","multipart/form-data; boundary="_..RootMIMEPart.Boundary)
-
     }
 
     Return ..HttpRequest
@@ -146,19 +144,21 @@ Method AddTextPart(name As %String, value As %String) As %Status [ Private ]
 
 Storage Default
 {
-<Data name="TelegramRequestDefaultData">
-<Subscript>"TelegramRequest"</Subscript>
+<Data name="Data">
+<Attribute>Data</Attribute>
+<Structure>node</Structure>
+<Subscript>"Telegram.Request.Data"</Subscript>
+</Data>
+<Data name="RequestDefaultData">
+<Subscript>"Request"</Subscript>
 <Value name="1">
 <Value>Method</Value>
 </Value>
 <Value name="2">
-<Value>Data</Value>
-</Value>
-<Value name="3">
 <Value>Files</Value>
 </Value>
 </Data>
-<DefaultData>TelegramRequestDefaultData</DefaultData>
+<DefaultData>RequestDefaultData</DefaultData>
 <Type>%Storage.Persistent</Type>
 }
 
