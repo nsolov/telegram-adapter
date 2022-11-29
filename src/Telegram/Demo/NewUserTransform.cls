@@ -1,7 +1,7 @@
-Class Telegram.Demo.NewUserTransform Extends Ens.DataTransform [ DependsOn = (Telegram.JSONRequest, Telegram.Request) ]
+Class Telegram.Demo.NewUserTransform Extends Ens.DataTransform [ DependsOn = (Telegram.JSONContainer, Telegram.Request) ]
 {
 
-ClassMethod Transform(source As Telegram.JSONRequest, ByRef target As Telegram.Request) As %Status
+ClassMethod Transform(source As Telegram.JSONContainer, ByRef target As Telegram.Request) As %Status
 {
     Set tSC = $$$OK
     Try {

@@ -10,7 +10,7 @@ Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %Registered
     If (..Target = "") {
         Return $$$ERROR(5001, "Target property required")
     }
-    Set msg = ##class(Telegram.JSONRequest).%New(pInput)
+    Set msg = ##class(Telegram.JSONContainer).%New(pInput)
     Return ..SendRequestAsync(..Target, msg)
 }
 

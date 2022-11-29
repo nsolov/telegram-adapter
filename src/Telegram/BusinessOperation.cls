@@ -12,7 +12,7 @@ Method ProcessRequest(pRequest As Telegram.Request, Output pResponse As Ens.Stri
       If (jo.ok = 0) {
         $$$ThrowStatus($$$ERROR($$$GeneralError,jo."error_code"_": "_jo.description))
       }
-      Set pResponse = ##class(Ens.StringContainer).%New(jo.%ToJSON())
+      Set pResponse = ##class(Telegram.JSONContainer).%New(jo)
     } Catch ex {
       Set tSC = ex.AsStatus()
     }

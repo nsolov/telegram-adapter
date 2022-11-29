@@ -3,7 +3,7 @@ Class Telegram.Request Extends Ens.Request
 
 Property Method As %String;
 
-Property Data As %DynamicAbstractObject;
+Property Data As %DynamicAbstractObject [ InitialExpression = "{}" ];
 
 Property Files As list Of %String;
 
