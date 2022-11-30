@@ -3,7 +3,7 @@
   <Document name="telegram-adapter.ZPM">
     <Module>
       <Name>telegram-adapter</Name>
-      <Version>0.0.1</Version>
+      <Version>0.1.0</Version>
       <Description>Telegram adapter</Description>
       <Author>
         <Person>Nikolay Solovyev</Person>
@@ -25,7 +25,18 @@
       </Invokes>
       <SourcesRoot>src</SourcesRoot>
       <Resource Name="Telegram.PKG"/>
-      <FileCopy Name="IRIS-logo.png" Target="${libdir}telegram-adapter/"/>
+      <CSPApplication 
+        CookiePath="/tg/" 
+        DefaultTimeout="900" 
+        DispatchClass="Telegram.WebHook" 
+        MatchRoles=":%All" 
+        PasswordAuthEnabled="0" 
+        Recurse="1" 
+        ServeFiles="1" 
+        ServeFilesTimeout="3600" 
+        UnauthenticatedEnabled="1" 
+        Url="/tg" 
+        UseSessionCookie="2"/>
     </Module>
   </Document>
 </Export>
